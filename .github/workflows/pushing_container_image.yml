@@ -7,13 +7,28 @@ jobs:
     name: Push image to multiple registries
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
+      -
+        name: Checkout code
         uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ github.actor }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: freddodd6/containers/docker/irods/ubuntu/18.04/Dockerfile
-          tag_with_ref: true
+ 
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./docker/irods/ubuntu/18.04/DockerFile
+          pull: true
+          push: true
+          cache-from: type=registry,ref=freddodd6/containers:latest
+          cache-to: type=inline
+          tags: freddodd6/containers:latest
