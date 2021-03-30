@@ -1,0 +1,19 @@
+name: Publish image
+on:
+  release:
+    types: [published]
+jobs:
+  push_to_registries:
+    name: Push image to multiple registries
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: freddodd6/containers/docker/irods/ubuntu/18.04/Dockerfile
+          tag_with_ref: true
