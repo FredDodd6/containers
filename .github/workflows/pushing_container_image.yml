@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./docker/irods/ubuntu/18.04/DockerFile
+          file: ./docker/irods/ubuntu/18.04/dockerfile
           pull: true
           push: true
           cache-from: type=registry,ref=freddodd6/containers:latest
