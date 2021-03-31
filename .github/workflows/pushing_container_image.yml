@@ -13,6 +13,8 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+        with:
+          buildkitd-flags: --debug
       -
         name: Login to DockerHub
         uses: docker/login-action@v1
@@ -20,15 +22,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
- 
       -
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./docker/irods/ubuntu/18.04/dockerfile
-          pull: true
+          context: ./docker/irods/
+          file: ./docker/irods/ubuntu/18.04/dockerfile #  'dockerfile' must be lowercase
           push: true
-          cache-from: type=registry,ref=freddodd6/containers:latest
+          pull: true
+          cache-from: type=registry,ref=freddodd6/containers:18.04
           cache-to: type=inline
-          tags: freddodd6/containers:latest
+          tags: freddodd6/containers:18.04 # need to double check tags
+          registry: docker.pkg.github.com
