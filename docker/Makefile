@@ -1,6 +1,6 @@
 TAG=$(shell git describe)
 LABEL_NAMESPACE=uk.ac.sanger
-TAG_NAMESPACE=wsinpg
+TAG_NAMESPACE=ghcr.io/freddodd6
 
 DOCKER_ARGS ?= --pull --no-cache # IMPORTANT to get security updates
 
