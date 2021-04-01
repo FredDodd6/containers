@@ -31,6 +31,9 @@ ub-16.04-base.$(TAG): base/ubuntu/16.04/Dockerfile
 	--tag $(TAG_NAMESPACE)/ub-16.04-base:$(TAG) --file $< ./base
 	touch $@
 
+.PHONY: ub-18.04-base
+ub-18.04-base: ub-18.04-base.$(TAG)
+
 ub-18.04-base.$(TAG): base/ubuntu/18.04/Dockerfile
 	docker build $(DOCKER_ARGS) \
 	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
