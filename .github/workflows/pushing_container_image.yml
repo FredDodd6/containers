@@ -28,10 +28,10 @@ jobs:
         name: Build
         run: |
             cd docker
-            make ub-18.04-base
+            make ub-16.04-irods-4.2.7
       -
         name: push
         run: |
             docker images
-            docker push ghcr.io/freddodd6/ub-18.04-base:latest
+            docker push ghcr.io/freddodd6/ub-16.04-irods-4.2.7:latest
         

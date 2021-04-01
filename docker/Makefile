@@ -15,6 +15,9 @@ images := $(addsuffix .$(TAG), $(image_names))
 
 all: $(images)
 
+.PHONY: ub-12.04-base
+ub-12.04-base: ub-12.04-base.$(TAG)
+
 ub-12.04-base.$(TAG): base/ubuntu/12.04/Dockerfile
 	docker build $(DOCKER_ARGS) \
 	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
@@ -22,6 +25,9 @@ ub-12.04-base.$(TAG): base/ubuntu/12.04/Dockerfile
 	--tag $(TAG_NAMESPACE)/ub-12.04-base:latest \
 	--tag $(TAG_NAMESPACE)/ub-12.04-base:$(TAG) --file $< ./base
 	touch $@
+
+.PHONY: ub-16.04-base
+ub-16.04-base: ub-16.04-base.$(TAG)
 
 ub-16.04-base.$(TAG): base/ubuntu/16.04/Dockerfile
 	docker build $(DOCKER_ARGS) \
@@ -42,6 +48,10 @@ ub-18.04-base.$(TAG): base/ubuntu/18.04/Dockerfile
 	--tag $(TAG_NAMESPACE)/ub-18.04-base:$(TAG) --file $< ./base
 	touch $@
 
+.PHONY: ub-12.04-conda.$(TAG)
+ub-12.04-conda: ub-12.04-conda.$(TAG)
+
+
 ub-12.04-conda.$(TAG): conda/ubuntu/12.04/Dockerfile ub-12.04-base.$(TAG)
 	docker build $(DOCKER_ARGS) \
 	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
@@ -50,6 +60,10 @@ ub-12.04-conda.$(TAG): conda/ubuntu/12.04/Dockerfile ub-12.04-base.$(TAG)
 	--tag $(TAG_NAMESPACE)/ub-12.04-conda:$(TAG) --file $< ./conda
 	touch $@
 
+.PHONY:ub-16.04-irods-4.2.7
+ub-16.04-irods-4.2.7: ub-16.04-irods-4.2.7.$(TAG) # might need . after first 7
+
+
 ub-16.04-irods-4.2.7.$(TAG): irods/ubuntu/16.04/Dockerfile ub-16.04-base.$(TAG)
 	docker build $(DOCKER_ARGS) \
 	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
@@ -57,6 +71,9 @@ ub-16.04-irods-4.2.7.$(TAG): irods/ubuntu/16.04/Dockerfile ub-16.04-base.$(TAG)
 	--tag $(TAG_NAMESPACE)/ub-16.04-irods-4.2.7:latest \
 	--tag $(TAG_NAMESPACE)/ub-16.04-irods-4.2.7:$(TAG) --file $< ./irods
 	touch $@
+
+.PHONY: ub-18.04-irods-4.2.8
+ub-18.04-irods-4.2.8: ub-18.04-irods-4.2.8.$(TAG)
 
 ub-18.04-irods-4.2.8.$(TAG): irods/ubuntu/18.04/Dockerfile ub-18.04-base.$(TAG)
 	docker build $(DOCKER_ARGS) \
