@@ -9,7 +9,7 @@ DOCKER_ARGS ?= --pull --no-cache # IMPORTANT to get security updates
 image_names := ub-12.04-base ub-16.04-base ub-18.04-base
 image_names += ub-12.04-conda
 image_names += ub-16.04-irods-4.2.7
-#image_names += ub-18.04-irods-4.2.8
+image_names += ub-18.04-irods-4.2.8
 
 images := $(addsuffix .$(TAG), $(image_names))
 
