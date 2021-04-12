@@ -59,13 +59,13 @@ ub-16.04-irods-4.2.7.$(TAG): irods/ubuntu/16.04/Dockerfile ub-16.04-base.$(TAG)
 	touch $@
 
 
-#ub-18.04-irods-4.2.8.$(TAG): irods/ubuntu/18.04/Dockerfile ub-18.04-base.$(TAG)
-#	docker build $(DOCKER_ARGS) \
-#	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
-#	--label $(LABEL_NAMESPACE).commit=$(shell git log --pretty=format:'%H' -n 1) \
-#	--tag $(TAG_NAMESPACE)/ub-18.04-irods-4.2.8:latest \
-#	--tag $(TAG_NAMESPACE)/ub-18.04-irods-4.2.8:$(TAG) --file $< ./irods
-#	touch $@
+ub-18.04-irods-4.2.8.$(TAG): irods/ubuntu/18.04/Dockerfile ub-18.04-base.$(TAG)
+	docker build $(DOCKER_ARGS) \
+	--label $(LABEL_NAMESPACE).repository=$(shell git remote get-url origin) \
+	--label $(LABEL_NAMESPACE).commit=$(shell git log --pretty=format:'%H' -n 1) \
+	--tag $(TAG_NAMESPACE)/ub-18.04-irods-4.2.8:latest \
+	--tag $(TAG_NAMESPACE)/ub-18.04-irods-4.2.8:$(TAG) --file $< ./irods
+	touch $@
 
 clean:
 	rm -f $(foreach image_name,$(image_names), $(image_name)*)
