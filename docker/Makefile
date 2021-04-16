@@ -1,6 +1,6 @@
 TAG=$(shell git describe)
 LABEL_NAMESPACE=uk.ac.sanger
-TAG_NAMESPACE=ghcr.io/wtsi-npg
+TAG_NAMESPACE=ghcr.io/$(REPO_OWNER)
 
 DOCKER_ARGS ?= --pull --no-cache # IMPORTANT to get security updates
 
