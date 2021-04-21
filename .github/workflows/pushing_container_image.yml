@@ -36,14 +36,14 @@ jobs:
         run: |
             cd docker
             make REPO_OWNER=${{ env.REPO_OWNER }}
-      -
-        name: push
+     
+      - name: push images
         run: |      
             docker images
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-12.04-base:latest
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-16.04-base:latest
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-18.04-base:latest
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-12.04-conda:latest
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-16.04-irods-4.2.7:latest
-            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-18.04-irods-4.2.8:latest
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-12.04-base:$GITHUB_SHA
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-16.04-base:$GITHUB_SHA
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-18.04-base:$GITHUB_SHA
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-12.04-conda:$GITHUB_SHA
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-16.04-irods-4.2.7:$GITHUB_SHA
+            docker push ghcr.io/${{ env.REPO_OWNER }}/ub-18.04-irods-4.2.8:$GITHUB_SHA
 
